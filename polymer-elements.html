@@ -212,6 +212,16 @@
         --paper-tooltip-text-color: var(--kawaii-pink-secondary);
         --paper-tooltip-duration-out: 500;
       }
+
+      #list-card-acnh {
+        display: grid;
+        width: 100%;
+        height: auto;
+        grid: auto-flow / 1fr 1fr;
+      }
+      #list-card-acnh paper-card {
+        margin: 10px;
+      }
     </style>
     <div id="my-app">
       <paper-toolbar>
@@ -379,21 +389,23 @@
             </div>
           </div>
           <div>
-            <dom-repeat items="{{listItems}}">
-              <template>
-                <paper-card image="{{item.img}}">
-                  <div class="card-content">
-                    <div class="cafe-header">
-                      <h2>{{item.name}}</h2>
+            <div id="list-card-acnh">
+              <dom-repeat items="{{listItems}}">
+                <template>
+                  <paper-card image="{{item.img}}">
+                    <div class="card-content">
+                      <div class="cafe-header">
+                        <h2>{{item.name}}</h2>
+                      </div>
+                      <p>{{item.saying}}</p>
+                      <p>
+                        <paper-icon-button icon="social:cake"></paper-icon-button> {{formatDate(item.birthday)}}
+                      </p>
                     </div>
-                    <p>{{item.saying}}</p>
-                    <p>
-                      <paper-icon-button icon="social:cake"></paper-icon-button> {{formatDate(item.birthday)}}
-                    </p>
-                  </div>
-                </paper-card>
-              </template>
-            </dom-repeat>
+                  </paper-card>
+                </template>
+              </dom-repeat>
+            </div>
             <dom-repeat items="{{listItems}}">
               <template>
                 <paper-icon-item>
