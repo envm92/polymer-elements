@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-badge/paper-badge.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-card/paper-card.html">
@@ -16,6 +17,10 @@
 <link rel="import" href="../paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../iron-icons/maps-icons.html">
+<link rel="import" href="../iron-icons/communication-icons.html">
+<link rel="import" href="../iron-icons/social-icons.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
 
 
 <dom-module id="polymer-elements">
@@ -67,13 +72,51 @@
         color: var(--kawaii-pink);
         font-weight: bolder;
       }
+      paper-button[toggles]{
+        background-color: var(--kawaii-green);
+        color: white;
+      }
+      paper-button[active] {
+        background-color: var(--kawaii-pink-secondary);
+      }
       paper-button.fancy:hover {
         background: var(--kawaii-purple);
       }
+      paper-button.pink {
+        color: var(--paper-pink-a200);
+        --paper-button-ink-color: var(--paper-pink-a200);
+      }
+      paper-button.pink:hover {
+        background-color: var(--paper-pink-100);
+      }
+      paper-button.indigo {
+        background-color: var(--paper-indigo-500);
+        color: white;
+        --paper-button-raised-keyboard-focus: {
+          background-color: var(--paper-pink-a200) !important;
+          color: white !important;
+        };
+      }
+      paper-button.indigo:hover {
+        background-color: var(--paper-indigo-400);
+      }
+      paper-button.green {
+        background-color: var(--paper-green-500);
+        color: white;
+      }
+      paper-button.green[active] {
+        background-color: var(--paper-red-500);
+      }
+      paper-button.disabled {
+        color: white;
+      }
       paper-card {
+        max-width: 256px;
         --paper-card-background-color: var(--kawaii-blue);
         --paper-card-header-color: var(--kawaii-pink-secondary);
         --paper-card-header: {
+          max-height: 256px;
+          max-width: 256px;
           @apply --kawaii-font-mixin;
         };
         --paper-card-content: {
@@ -94,15 +137,18 @@
       }
       paper-icon-item {
         --iron-icon-fill-color: var(--kawaii-purple);
-        --iron-icon-height: 45px;
-        --iron-icon-width: 45px;
+      }
+      paper-icon-item .avatar img {
+        height: 30px;
+        background-color:  var(--kawaii-pink-light);
+        border-radius: 30px;
       }
       paper-item {
-        --paper-item-min-height: 100px;
         --paper-item-selected-weight: bolder;
       }
       paper-icon-item {
         --iron-icon-fill-color: var(--kawaii-pink-secondary);
+        --paper-item-icon-width: 40px;
       }
       paper-item-body {
         --paper-item-body-secondary-color: var(--kawaii-pink);
@@ -111,13 +157,13 @@
       paper-progress {
         --paper-progress-active-color: var(--kawaii-blue);
         --paper-progress-secondary-color: var(--kawaii-green);
-        --paper-progress-container-color: var(--kawaii-yellow);
+        --paper-progress-container-color: var(--kawaii-pink-light);
       }
       paper-progress.blue {
         --paper-progress-active-color: var(--kawaii-blue);
       }
       paper-progress.pink {
-        --paper-progress-active-color: var(--kawaii-pink-light);
+        --paper-progress-active-color: var(--kawaii-pink-secondary);
       }
       paper-progress.slow {
         --paper-progress-indeterminate-cycle-duration: 20s;
@@ -152,16 +198,11 @@
       paper-toolbar {
         --paper-toolbar-background: var(--kawaii-pink);
         --paper-toolbar-color: var(--kawaii-yellow);
-        --paper-toolbar-height: 50px;
-        --paper-toolbar-sm-height: 40px;
         --paper-toolbar-title: {
           @apply --kawaii-title-mixin;
         };
         --paper-toolbar: {
           border-radius: 20px 20px 0 0;
-        };
-        --paper-toolbar-content : {
-          padding: 5px;
         };
       }
 
@@ -172,115 +213,200 @@
         --paper-tooltip-duration-out: 500;
       }
     </style>
-    <div>
-      <span>Inbox</span>
-      <paper-badge label="🌸"></paper-badge>
-    </div>
+    <div id="my-app">
+      <paper-toolbar>
+        <div slot="middle" class="title">My App</div>
+        <template is="dom-if" if="{{isLoading}}">
+          <paper-progress slot="middle" class="slow fit" indeterminate></paper-progress>
+        </template>
+      </paper-toolbar>
+      <paper-tabs selected="{{tabSelected}}" scrollable>
+        <paper-tab>Examples</paper-tab>
+        <paper-tab>List</paper-tab>
+      </paper-tabs>
+      <div>
+        <iron-pages selected="{{tabSelected}}">
+          <div id="examples">
+            <h2>01. Paper Badge</h2>
+            <div>
+              <span>Inbox</span>
+              <paper-badge label="🌸"></paper-badge>
+            </div>
+            <br/>
+            <div>
+              <span>Inbox</span>
+              <paper-badge label="3"></paper-badge>
+            </div>
+            <hr/>
+            <h2>02. Paper Button</h2>
+            <div>
+              <paper-button>Flat button</paper-button>
+              <paper-button class="fancy">Flat button fancy</paper-button>
+              <paper-button disabled>Flat button Disabled</paper-button>
+              <paper-button raised>Raised button</paper-button>
+              <paper-button noink>No ripple effect</paper-button>
+              <paper-button toggles>Toggle-able button</paper-button>
+              <paper-button class="pink">link</paper-button>
+              <paper-button raised class="indigo">raised</paper-button>
+              <paper-button toggles raised class="green">toggles</paper-button>
+              <paper-button disabled class="disabled">disabled</paper-button>
+            </div>
 
-    <br/>
-    <div>
-      <span>Inbox</span>
-      <paper-badge label="3"></paper-badge>
-    </div>
+            <hr/>
+            <h2>03. Paper Card</h2>
+            <paper-card heading="Card Title">
+              <div class="card-content">Some content</div>
+              <div class="card-actions">
+                <paper-button>Some action</paper-button>
+              </div>
+            </paper-card>
 
-    <hr/>
-    <div>
-      <paper-button>Flat button</paper-button>
-      <paper-button class="fancy">Flat button fancy</paper-button>
-      <paper-button disabled>Flat button Disabled</paper-button>
-      <paper-button raised>Raised button</paper-button>
-      <paper-button noink>No ripple effect</paper-button>
-      <paper-button toggles>Toggle-able button</paper-button>
-    </div>
+            <paper-card image="https://picsum.photos/300/200">
+              <div class="card-content">
+                <div class="cafe-header">Cafe Basilico
+                  <div class="cafe-location cafe-light">
+                    <iron-icon icon="communication:location-on"></iron-icon>
+                    <span>250ft</span>
+                  </div>
+                </div>
+                <div class="cafe-rating">
+                  <iron-icon class="star" icon="star"></iron-icon>
+                  <iron-icon class="star" icon="star"></iron-icon>
+                  <iron-icon class="star" icon="star"></iron-icon>
+                  <iron-icon class="star" icon="star"></iron-icon>
+                  <iron-icon class="star" icon="star"></iron-icon>
+                </div>
+                <p>$・Italian, Cafe</p>
+                <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting.</p>
+              </div>
+              <div class="card-actions">
+                <div class="horizontal justified">
+                  <paper-icon-button icon="icons:event"></paper-icon-button>
+                  <paper-button>5:30PM</paper-button>
+                  <paper-button>7:30PM</paper-button>
+                  <paper-button>9:00PM</paper-button>
+                  <paper-button class="cafe-reserve">Reserve</paper-button>
+                </div>
+              </div>
+            </paper-card>
 
-    <hr/>
-    <paper-card heading="Card Title">
-      <div class="card-content">Some content</div>
-      <div class="card-actions">
-        <paper-button>Some action</paper-button>
+            <hr/>
+            <h2>04. Paper Dropdown Menu</h2>
+            <paper-dropdown-menu label="Your favourite pastry">
+              <paper-listbox slot="dropdown-content">
+                <paper-item>Croissant</paper-item>
+                <paper-item>Donut</paper-item>
+                <paper-item>Financier</paper-item>
+                <paper-item>Madeleine</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+
+            <hr/>
+            <h2>05. Paper Icon Button</h2>
+            <paper-icon-button icon="menu"></paper-icon-button>
+
+            <hr/>
+            <h2>06. Paper Item</h2>
+            <paper-icon-item>
+              <iron-icon icon="favorite" slot="item-icon"></iron-icon>
+              Favorite
+            </paper-icon-item>
+            <paper-icon-item>
+              <div class="avatar" slot="item-icon"></div>
+              Avatar
+            </paper-icon-item>
+
+            <paper-item>
+              <paper-item-body two-line>
+                <div>Show your status</div>
+                <div secondary>Your status is visible to everyone</div>
+              </paper-item-body>
+            </paper-item>
+
+            <paper-item>
+              <paper-item-body two-line>
+                <div>Show your status</div>
+                <div secondary>Your status is visible to everyone</div>
+              </paper-item-body>
+              <iron-icon icon="warning"></iron-icon>
+            </paper-item>
+            <hr/>
+            <h2>07. Paper Menu Button</h2>
+            <paper-menu-button>
+              <paper-icon-button icon="menu" slot="dropdown-trigger"></paper-icon-button>
+              <paper-listbox slot="dropdown-content">
+                <paper-item>Share</paper-item>
+                <paper-item>Settings</paper-item>
+                <paper-item>Help</paper-item>
+              </paper-listbox>
+            </paper-menu-button>
+
+            <hr/>
+            <h2>08. Paper Progress</h2>
+            <paper-progress indeterminate class="blue"></paper-progress>
+            <br/>
+            <paper-progress indeterminate class="slow pink"></paper-progress>
+            <br/>
+            <paper-progress value="40" secondary-progress="80"></paper-progress>
+
+            <hr/>
+            <h2>09. Paper Spinner</h2>
+            <paper-spinner active></paper-spinner>
+            <paper-spinner-lite active></paper-spinner-lite>
+            <hr/>
+            <h2>10. Paper Swatch Picker</h2>
+            <paper-swatch-picker color="{{selectedColor}}" column-count=7 color-list='["#ffc9f3", "#ffabde", "#ff6cc5", "#dbafff", "#afd0ff", "#aafff8", "#ffffb0"]'></paper-swatch-picker>
+            <hr/>
+            <h2>11. Paper Tabs</h2>
+            <paper-tabs selected="0" scrollable>
+              <paper-tab>The first tab</paper-tab>
+              <paper-tab>Tab two</paper-tab>
+              <paper-tab>The third tab</paper-tab>
+              <paper-tab>Fourth tab</paper-tab>
+            </paper-tabs>
+
+            <hr/>
+            <h2>12.Paper Toolbar</h2>
+            <paper-toolbar>
+              <span slot="top" class="title">Title</span>
+            </paper-toolbar>
+
+            <hr/>
+            <h2>13.Paper Tooltip</h2>
+            <div style="display:inline-block">
+              <button>Click me!</button>
+              <paper-tooltip>Tooltip text</paper-tooltip>
+            </div>
+          </div>
+          <div>
+            <dom-repeat items="{{listItems}}">
+              <template>
+                <paper-card image="{{item.img}}">
+                  <div class="card-content">
+                    <div class="cafe-header">
+                      <h2>{{item.name}}</h2>
+                    </div>
+                    <p>{{item.saying}}</p>
+                    <p>
+                      <paper-icon-button icon="social:cake"></paper-icon-button> {{formatDate(item.birthday)}}
+                    </p>
+                  </div>
+                </paper-card>
+              </template>
+            </dom-repeat>
+            <dom-repeat items="{{listItems}}">
+              <template>
+                <paper-icon-item>
+                  <div class="avatar" slot="item-icon">
+                    <img src="{{item.icon}}"/>
+                  </div>
+                  <h2>{{item.name}}</h2>
+                </paper-icon-item>
+              </template>
+            </dom-repeat>
+          </div>
+        </iron-pages>
       </div>
-    </paper-card>
-
-    <hr/>
-    <paper-dropdown-menu label="Your favourite pastry">
-      <paper-listbox slot="dropdown-content">
-        <paper-item>Croissant</paper-item>
-        <paper-item>Donut</paper-item>
-        <paper-item>Financier</paper-item>
-        <paper-item>Madeleine</paper-item>
-      </paper-listbox>
-    </paper-dropdown-menu>
-
-    <hr/>
-    <paper-icon-button icon="menu"></paper-icon-button>
-
-    <hr/>
-    <paper-icon-item>
-      <iron-icon icon="favorite" slot="item-icon"></iron-icon>
-      Favorite
-    </paper-icon-item>
-    <paper-icon-item>
-      <div class="avatar" slot="item-icon"></div>
-      Avatar
-    </paper-icon-item>
-
-    <paper-item>
-      <paper-item-body two-line>
-        <div>Show your status</div>
-        <div secondary>Your status is visible to everyone</div>
-      </paper-item-body>
-    </paper-item>
-
-    <paper-item>
-      <paper-item-body two-line>
-        <div>Show your status</div>
-        <div secondary>Your status is visible to everyone</div>
-      </paper-item-body>
-      <iron-icon icon="warning"></iron-icon>
-    </paper-item>
-    <hr/>
-    <paper-menu-button>
-      <paper-icon-button icon="menu" slot="dropdown-trigger"></paper-icon-button>
-      <paper-listbox slot="dropdown-content">
-        <paper-item>Share</paper-item>
-        <paper-item>Settings</paper-item>
-        <paper-item>Help</paper-item>
-      </paper-listbox>
-    </paper-menu-button>
-
-    <hr/>
-    <paper-progress indeterminate class="blue"></paper-progress>
-    <br/>
-    <paper-progress indeterminate class="slow pink"></paper-progress>
-    <br/>
-    <paper-progress value="40" secondary-progress="80"></paper-progress>
-
-    <hr/>
-
-    <paper-spinner active></paper-spinner>
-    <paper-spinner-lite active></paper-spinner-lite>
-    <hr/>
-
-    <paper-swatch-picker color="{{selectedColor}}" column-count=7 color-list='["#ffc9f3", "#ffabde", "#ff6cc5", "#dbafff", "#afd0ff", "#aafff8", "#ffffb0"]'></paper-swatch-picker>
-    <hr/>
-    <paper-tabs selected="0" scrollable>
-      <paper-tab>The first tab</paper-tab>
-      <paper-tab>Tab two</paper-tab>
-      <paper-tab>The third tab</paper-tab>
-      <paper-tab>Fourth tab</paper-tab>
-    </paper-tabs>
-
-    <hr/>
-
-    <paper-toolbar>
-      <span slot="top" class="title">Title</span>
-    </paper-toolbar>
-
-    <hr/>
-
-    <div style="display:inline-block">
-      <button>Click me!</button>
-      <paper-tooltip>Tooltip text</paper-tooltip>
     </div>
 
   </template>
@@ -298,12 +424,60 @@
       static get is() { return 'polymer-elements'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'polymer-elements'
+          tabSelected: {
+            type: Number,
+            value: 0
+          },
+          isLoading: {
+            type: Boolean,
+            value: false
+          },
+          listItems : {
+            type: Array,
+            value: [
+              {
+                id: 1,
+                name: 'Cyrano',
+                birthday: new Date(2001, 3, 9),
+                gender: 'm',
+                saying: 'Don\'t punch your nose to spite your face',
+                img: 'https://acnhapi.com/v1/images/villagers/1',
+                icon: 'https://acnhapi.com/v1/icons/villagers/1',
+
+              } , {
+                id: 9,
+                name: 'Pinky',
+                birthday: new Date(2001, 9, 9),
+                gender: 'f',
+                saying: 'Time spent with friends is time well spent',
+                img: 'https://acnhapi.com/v1/images/villagers/9',
+                icon: 'https://acnhapi.com/v1/icons/villagers/9',
+              } , {
+                id: 60,
+                name: 'Lolly',
+                birthday: new Date(2001, 3, 27),
+                gender: 'f',
+                saying: 'Laughter is the best medicine',
+                img: 'https://acnhapi.com/v1/images/villagers/60',
+                icon: 'https://acnhapi.com/v1/icons/villagers/60',
+              } , {
+                id: 60,
+                name: 'Julian',
+                birthday: new Date(2001, 3, 15),
+                gender: 'm',
+                saying: 'Never trot when you can prance',
+                img: 'https://acnhapi.com/v1/images/villagers/218',
+                icon: 'https://acnhapi.com/v1/icons/villagers/218',
+              }
+            ]
           }
         };
       }
+
+      formatDate(date) {
+        return date.toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
     }
 
     window.customElements.define(PolymerElements.is, PolymerElements);
