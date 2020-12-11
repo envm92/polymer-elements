@@ -1,0 +1,311 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-badge/paper-badge.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../paper-item/paper-item-body.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
+<link rel="import" href="../paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../paper-swatch-picker/paper-swatch-picker.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+
+<dom-module id="polymer-elements">
+  <template>
+    <style>
+      :host {
+        display: block;
+        --kawaii-pink: #ffabde;
+        --kawaii-purple: #dbafff;
+        --kawaii-blue: #afd0ff;
+        --kawaii-green: #aafff8;
+        --kawaii-yellow: #ffffb0;
+        --kawaii-pink-secondary: #ff6cc5;
+        --kawaii-pink-light: #ffc9f3;
+        --kawaii-font-mixin: {
+          font-family: Arial, sans-serif;
+        };
+        --kawaii-title-mixin: {
+          @apply --kawaii-font-mixin;
+          font-weight: bolder;
+          font-size: x-large;
+        };
+        --kawaii-subtitle-mixin: {
+          @apply --kawaii-font-mixin;
+          font-size: small;
+        }
+      }
+      paper-badge {
+        --paper-badge-background: var(--kawaii-blue);
+        --paper-badge-opacity: .8;
+        --paper-badge-text-color: var(--kawaii-green);
+        --paper-badge-width: 30px;
+        --paper-badge-height: 30px;
+        --paper-badge-margin-left: 1px;
+        --paper-badge-margin-bottom: .5px;
+        --paper-badge: {
+          @apply --kawaii-font-mixin;
+        }
+      }
+      paper-button {
+        @apply --kawaii-font-mixin;
+        --paper-button-ink-color: var(--kawaii-blue);
+        --paper-button-disabled: {
+          color: var(--kawaii-purple);
+        }
+      }
+      paper-button.fancy {
+        background: var(--kawaii-green);
+        color: var(--kawaii-pink);
+        font-weight: bolder;
+      }
+      paper-button.fancy:hover {
+        background: var(--kawaii-purple);
+      }
+      paper-card {
+        --paper-card-background-color: var(--kawaii-blue);
+        --paper-card-header-color: var(--kawaii-pink-secondary);
+        --paper-card-header: {
+          @apply --kawaii-font-mixin;
+        };
+        --paper-card-content: {
+          @apply --kawaii-font-mixin;
+        };
+        --paper-card-actions: {
+          background: var(--kawaii-green);
+          color: var(--kawaii-pink-secondary);
+        }
+      }
+      paper-dropdown-menu {
+        --paper-dropdown-menu: {
+          @apply --kawaii-font-mixin;
+        };
+      }
+      paper-icon-button {
+        --paper-icon-button-ink-color: var(--kawaii-purple);
+      }
+      paper-icon-item {
+        --iron-icon-fill-color: var(--kawaii-purple);
+        --iron-icon-height: 45px;
+        --iron-icon-width: 45px;
+      }
+      paper-item {
+        --paper-item-min-height: 100px;
+        --paper-item-selected-weight: bolder;
+      }
+      paper-icon-item {
+        --iron-icon-fill-color: var(--kawaii-pink-secondary);
+      }
+      paper-item-body {
+        --paper-item-body-secondary-color: var(--kawaii-pink);
+      }
+
+      paper-progress {
+        --paper-progress-active-color: var(--kawaii-blue);
+        --paper-progress-secondary-color: var(--kawaii-green);
+        --paper-progress-container-color: var(--kawaii-yellow);
+      }
+      paper-progress.blue {
+        --paper-progress-active-color: var(--kawaii-blue);
+      }
+      paper-progress.pink {
+        --paper-progress-active-color: var(--kawaii-pink-light);
+      }
+      paper-progress.slow {
+        --paper-progress-indeterminate-cycle-duration: 20s;
+      }
+
+      paper-spinner {
+        --paper-spinner-layer-1-color: var(--kawaii-pink);
+        --paper-spinner-layer-2-color: var(--kawaii-purple);
+        --paper-spinner-layer-3-color: var(--kawaii-blue);
+        --paper-spinner-layer-4-color: var(--kawaii-green);
+        --paper-spinner-stroke-width: 4px;
+      }
+
+      paper-spinner-lite {
+        --paper-spinner-color: var(--kawaii-yellow);
+      }
+
+      paper-swatch-picker {
+        --paper-swatch-picker-color-size: 40px;
+        --paper-swatch-picker-icon-size: 30px;
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--kawaii-green);
+      }
+      paper-tab {
+        --paper-tab-ink: var(--kawaii-purple);
+        --paper-tab: {
+          @apply --kawaii-subtitle-mixin;
+        }
+      }
+      paper-toolbar {
+        --paper-toolbar-background: var(--kawaii-pink);
+        --paper-toolbar-color: var(--kawaii-yellow);
+        --paper-toolbar-height: 50px;
+        --paper-toolbar-sm-height: 40px;
+        --paper-toolbar-title: {
+          @apply --kawaii-title-mixin;
+        };
+        --paper-toolbar: {
+          border-radius: 20px 20px 0 0;
+        };
+        --paper-toolbar-content : {
+          padding: 5px;
+        };
+      }
+
+      paper-tooltip {
+        --paper-tooltip-background: var(--kawaii-blue);
+        --paper-tooltip-opacity: .8;
+        --paper-tooltip-text-color: var(--kawaii-pink-secondary);
+        --paper-tooltip-duration-out: 500;
+      }
+    </style>
+    <div>
+      <span>Inbox</span>
+      <paper-badge label="🌸"></paper-badge>
+    </div>
+
+    <br/>
+    <div>
+      <span>Inbox</span>
+      <paper-badge label="3"></paper-badge>
+    </div>
+
+    <hr/>
+    <div>
+      <paper-button>Flat button</paper-button>
+      <paper-button class="fancy">Flat button fancy</paper-button>
+      <paper-button disabled>Flat button Disabled</paper-button>
+      <paper-button raised>Raised button</paper-button>
+      <paper-button noink>No ripple effect</paper-button>
+      <paper-button toggles>Toggle-able button</paper-button>
+    </div>
+
+    <hr/>
+    <paper-card heading="Card Title">
+      <div class="card-content">Some content</div>
+      <div class="card-actions">
+        <paper-button>Some action</paper-button>
+      </div>
+    </paper-card>
+
+    <hr/>
+    <paper-dropdown-menu label="Your favourite pastry">
+      <paper-listbox slot="dropdown-content">
+        <paper-item>Croissant</paper-item>
+        <paper-item>Donut</paper-item>
+        <paper-item>Financier</paper-item>
+        <paper-item>Madeleine</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+
+    <hr/>
+    <paper-icon-button icon="menu"></paper-icon-button>
+
+    <hr/>
+    <paper-icon-item>
+      <iron-icon icon="favorite" slot="item-icon"></iron-icon>
+      Favorite
+    </paper-icon-item>
+    <paper-icon-item>
+      <div class="avatar" slot="item-icon"></div>
+      Avatar
+    </paper-icon-item>
+
+    <paper-item>
+      <paper-item-body two-line>
+        <div>Show your status</div>
+        <div secondary>Your status is visible to everyone</div>
+      </paper-item-body>
+    </paper-item>
+
+    <paper-item>
+      <paper-item-body two-line>
+        <div>Show your status</div>
+        <div secondary>Your status is visible to everyone</div>
+      </paper-item-body>
+      <iron-icon icon="warning"></iron-icon>
+    </paper-item>
+    <hr/>
+    <paper-menu-button>
+      <paper-icon-button icon="menu" slot="dropdown-trigger"></paper-icon-button>
+      <paper-listbox slot="dropdown-content">
+        <paper-item>Share</paper-item>
+        <paper-item>Settings</paper-item>
+        <paper-item>Help</paper-item>
+      </paper-listbox>
+    </paper-menu-button>
+
+    <hr/>
+    <paper-progress indeterminate class="blue"></paper-progress>
+    <br/>
+    <paper-progress indeterminate class="slow pink"></paper-progress>
+    <br/>
+    <paper-progress value="40" secondary-progress="80"></paper-progress>
+
+    <hr/>
+
+    <paper-spinner active></paper-spinner>
+    <paper-spinner-lite active></paper-spinner-lite>
+    <hr/>
+
+    <paper-swatch-picker color="{{selectedColor}}" column-count=7 color-list='["#ffc9f3", "#ffabde", "#ff6cc5", "#dbafff", "#afd0ff", "#aafff8", "#ffffb0"]'></paper-swatch-picker>
+    <hr/>
+    <paper-tabs selected="0" scrollable>
+      <paper-tab>The first tab</paper-tab>
+      <paper-tab>Tab two</paper-tab>
+      <paper-tab>The third tab</paper-tab>
+      <paper-tab>Fourth tab</paper-tab>
+    </paper-tabs>
+
+    <hr/>
+
+    <paper-toolbar>
+      <span slot="top" class="title">Title</span>
+    </paper-toolbar>
+
+    <hr/>
+
+    <div style="display:inline-block">
+      <button>Click me!</button>
+      <paper-tooltip>Tooltip text</paper-tooltip>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * `polymer-elements`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PolymerElements extends Polymer.Element {
+      static get is() { return 'polymer-elements'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'polymer-elements'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PolymerElements.is, PolymerElements);
+  </script>
+</dom-module>
